@@ -25,5 +25,6 @@ export const handleError = (request: restify.Request, response: restify.Response
             })
             break;
     }
+    
     done()
 }
