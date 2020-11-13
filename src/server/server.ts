@@ -16,32 +16,32 @@ initializeDb() {
 }
 
 initRoutes(routers: Router[]): Promise<any> {
-    return new Promise((resolve, reject) => {
-        try {
-            this.application = restify.createServer({
-                name: 'meat-api',
-                version: '1.0.0',
-            });
-                
-            this.application.use(restify.plugins.queryParser());
-            this.application.use(restify.plugins.bodyParser());
-            this.application.use(mergerPatchBodyParser);
-            //routes
-            for (let router of routers) {
-                router.applyRoutes(this.application)
-            }
+return new Promise((resolve, reject) => {
+    try {
+        this.application = restify.createServer({
+            name: 'meat-api',
+            version: '1.0.0',
+        });
+            
+        this.application.use(restify.plugins.queryParser());
+        this.application.use(restify.plugins.bodyParser());
+        this.application.use(mergerPatchBodyParser);
+        //routes
+        for (let router of routers) {
+            router.applyRoutes(this.application)
+        }
 
-            this.application.listen(environment.server.port, () => {
-                resolve(this.application)
-            })
-
-            this.application.on('restifyError', handleError)
-
-            } catch (error) {
-                reject(error)
-            }
+        this.application.listen(environment.server.port, () => {
+            resolve(this.application)
         })
-    }
+
+        this.application.on('restifyError', handleError)
+
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
 
     bootstrap(routers: Router[] = []): Promise<Server> {
         return this.initializeDb().then(() => 
