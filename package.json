@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "bcrypt": "^5.0.0",
     "mongoose": "^5.10.12",
     "nodemon": "^2.0.6",
     "restify": "6.3.4",

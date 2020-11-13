@@ -20,12 +20,9 @@ export const handleError = (request: restify.Request, response: restify.Response
             for(let name in err.errors){
                 messages.push({message: err.errors[name].message})
             }
-
             err.toJSON = () => ({
                 errors: messages
             })
-            break;
-        default:
             break;
     }
     done()
