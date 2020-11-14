@@ -30,7 +30,7 @@ class UsersRouter extends Router {
     })
 
     application.put('/users/:id', (request, response, next) => {
-      const options = { overwrite: true}
+      const options = { runValidators: true, overwrite: true }
       User.update({_id: request.params.id}, request.body, options)
       .exec().then(result => {
         if(result.n){
@@ -38,13 +38,11 @@ class UsersRouter extends Router {
         }else{
           throw new NotFoundError('Document not found');
         }
-      })
-        .then(this.render(response, next))
-        .catch(next)
+      }).then(this.render(response, next)).catch(next)
     })
       
     application.patch('users/:id', (request, response, next) => {
-      const options = { new: true }
+      const options = { runValidators: true, new: true }
       User.findByIdAndUpdate({_id: request.params.id}, request.body, options)
         .then(this.render(response, next))
         .catch(next)
